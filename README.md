@@ -45,6 +45,7 @@
 ### 启动服务器
 
 ```bash
+git clone https://github.com/mmmhjp/pychat.git
 cd pychat
 python src/服务器.py
 ```
@@ -142,16 +143,22 @@ pychat/
 
 ## 运行测试
 
+在**仓库根目录**执行：
+
 ```bash
-# 1. 启动无界面服务器
+# 1. 服务端全量回归测试（56 项，会自行启动服务器）
+python tests/test_regression.py
+
+# 2. 另开终端启动无界面服务器
 python tests/run_server_headless.py
 
-# 2. 另开终端运行客户端端到端测试
+# 3. 客户端端到端测试（19 项）
 python tests/test_client_e2e.py
-
-# 3. 服务端全量回归测试（会自行启动服务器）
-python tests/test_regression.py
 ```
+
+停止无界面服务器：在仓库根目录创建 `_stop.flag` 文件即可优雅退出。
+
+> 测试脚本按仓库根目录定位 `src/`，因此请勿改变目录结构。
 
 ---
 
