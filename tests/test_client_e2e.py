@@ -2,13 +2,18 @@
 """客户端端到端：真实客户端 GUI 连真实服务器，验证本轮客户端改动。"""
 import base64, hashlib, importlib.util, json, os, socket, struct, sys, threading, time, tkinter as tk
 
-# 仓库根目录：本文件位于 <repo>/tests/，源码位于 <repo>/src/
+# 定位源码目录，兼容两种布局：
+#   1) 仓库结构：本文件在 <repo>/tests/，源码在 <repo>/src/
+#   2) 平铺结构：本文件与源码在同一目录
 TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(TESTS_DIR)
-SRC_DIR = os.path.join(REPO_ROOT, "src")
+_repo_src = os.path.join(os.path.dirname(TESTS_DIR), "src")
+if os.path.isfile(os.path.join(_repo_src, "服务器.py")):
+    BASE = os.path.dirname(TESTS_DIR)
+    SRC_DIR = _repo_src
+else:
+    BASE = TESTS_DIR
+    SRC_DIR = TESTS_DIR
 
-# 在仓库根目录运行，运行时数据落在根目录下的 data/
-BASE = REPO_ROOT
 os.chdir(BASE); sys.path.insert(0, SRC_DIR)
 failures = []
 

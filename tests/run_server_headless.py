@@ -8,12 +8,18 @@
 """
 import importlib.util, os, sys, tkinter as tk
 
-# 仓库根目录：本文件位于 <repo>/tests/，源码位于 <repo>/src/
+# 定位源码目录，兼容两种布局：
+#   1) 仓库结构：本文件在 <repo>/tests/，源码在 <repo>/src/
+#   2) 平铺结构：本文件与源码在同一目录
 TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(TESTS_DIR)
-SRC_DIR = os.path.join(REPO_ROOT, "src")
+_repo_src = os.path.join(os.path.dirname(TESTS_DIR), "src")
+if os.path.isfile(os.path.join(_repo_src, "服务器.py")):
+    BASE = os.path.dirname(TESTS_DIR)
+    SRC_DIR = _repo_src
+else:
+    BASE = TESTS_DIR
+    SRC_DIR = TESTS_DIR
 
-BASE = REPO_ROOT
 os.chdir(BASE)
 sys.path.insert(0, SRC_DIR)
 spec = importlib.util.spec_from_file_location("py_server", os.path.join(SRC_DIR, "服务器.py"))
