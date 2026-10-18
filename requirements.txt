@@ -1,0 +1,26 @@
+# pychat 运行依赖
+#
+# 当前 pychat v1.0.0 全部使用 Python 标准库实现，
+# 无需安装任何第三方依赖即可运行。
+#
+# 安装方式：
+#   pip install -r requirements.txt
+#
+# 最低 Python 版本：3.8（代码使用 f-string 与类型注解的新式写法）
+# 推荐 Python 版本：3.10 及以上
+
+# ---- 运行时依赖 ----
+# （无）
+
+# ---- 开发/测试可选依赖 ----
+# 运行自动化测试时如需更完善的断言与覆盖率报告，可安装：
+#   pytest>=7.0
+#   coverage>=7.0
+
+# ---- 打包可选依赖 ----
+# 若要自行构建可执行文件（exe），需安装：
+#   pyinstaller>=6.0
+#
+# 构建命令（在本仓库根目录执行）：
+#   pyinstaller --onefile --windowed --name pychat-server src/服务器.py
+#   pyinstaller --onefile --windowed --name pychat-client src/客户端.py

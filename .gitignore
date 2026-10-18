@@ -1,0 +1,57 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== pychat 运行时产生的数据（不应提交）=====
+# 服务器运行时生成的配置与数据
+blacklist.txt
+device_blacklist.txt
+hardware_blacklist.txt
+mute_list.txt
+server_hidden.txt
+private_chat_log.txt
+client_device_id.txt
+message_draft.txt
+
+# data/ 目录只保留说明文档
+data/*
+!data/README.md
+
+# 共享文件目录（运行时生成）
+shared_files/
+*.part
+*.upload_*
+
+# 本地构建产物
+build/
+dist/
+*.egg-info/
+# release/ 下的正式发布物需要入库，故不忽略
+# 若你不想把 exe 提交进仓库，取消下面两行注释即可
+# release/
+# *.exe

@@ -1,0 +1,22 @@
+# 默认按文本处理，提交时统一使用 LF
+* text=auto eol=lf
+
+# Windows 脚本保持 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制文件不做换行符转换
+*.exe binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+
+# 源码与文档明确按 UTF-8 处理
+*.py text working-tree-encoding=UTF-8
+*.md text working-tree-encoding=UTF-8
+*.txt text working-tree-encoding=UTF-8
+VERSION text working-tree-encoding=UTF-8
