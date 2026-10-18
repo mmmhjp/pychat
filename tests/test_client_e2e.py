@@ -2,8 +2,14 @@
 """客户端端到端：真实客户端 GUI 连真实服务器，验证本轮客户端改动。"""
 import base64, hashlib, importlib.util, json, os, socket, struct, sys, threading, time, tkinter as tk
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-os.chdir(BASE); sys.path.insert(0, BASE)
+# 仓库根目录：本文件位于 <repo>/tests/，源码位于 <repo>/src/
+TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(TESTS_DIR)
+SRC_DIR = os.path.join(REPO_ROOT, "src")
+
+# 在仓库根目录运行，运行时数据落在根目录下的 data/
+BASE = REPO_ROOT
+os.chdir(BASE); sys.path.insert(0, SRC_DIR)
 failures = []
 
 
@@ -12,7 +18,7 @@ def check(label, cond, extra=""):
     if not cond: failures.append(label)
 
 
-spec = importlib.util.spec_from_file_location("py_client", os.path.join(BASE, "客户端.py"))
+spec = importlib.util.spec_from_file_location("py_client", os.path.join(SRC_DIR, "客户端.py"))
 cli = importlib.util.module_from_spec(spec); sys.modules["py_client"] = cli
 spec.loader.exec_module(cli)
 

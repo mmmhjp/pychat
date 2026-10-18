@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
-"""以隐藏窗口方式运行真实服务器，供客户端集成测试连接。"""
+"""以隐藏窗口方式运行真实服务器，供客户端集成测试连接。
+
+用法（在仓库根目录执行）：
+    python tests/run_server_headless.py
+
+停止方式：在仓库根目录创建 _stop.flag 文件即可优雅退出。
+"""
 import importlib.util, os, sys, tkinter as tk
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+# 仓库根目录：本文件位于 <repo>/tests/，源码位于 <repo>/src/
+TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(TESTS_DIR)
+SRC_DIR = os.path.join(REPO_ROOT, "src")
+
+BASE = REPO_ROOT
 os.chdir(BASE)
-spec = importlib.util.spec_from_file_location("py_server", os.path.join(BASE, "服务器.py"))
+sys.path.insert(0, SRC_DIR)
+spec = importlib.util.spec_from_file_location("py_server", os.path.join(SRC_DIR, "服务器.py"))
 srv = importlib.util.module_from_spec(spec); sys.modules["py_server"] = srv
 spec.loader.exec_module(srv)
 

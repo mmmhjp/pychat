@@ -9,9 +9,15 @@
 """
 import base64, hashlib, importlib.util, json, os, socket, struct, sys, threading, time, tkinter as tk
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+# 仓库根目录：本文件位于 <repo>/tests/，源码位于 <repo>/src/
+TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(TESTS_DIR)
+SRC_DIR = os.path.join(REPO_ROOT, "src")
+
+# 在仓库根目录运行，运行时数据落在根目录下的 data/
+BASE = REPO_ROOT
 os.chdir(BASE)
-sys.path.insert(0, BASE)
+sys.path.insert(0, SRC_DIR)
 
 failures = []
 
@@ -23,7 +29,7 @@ def check(label, cond, extra=""):
 
 
 def load(name, fn):
-    spec = importlib.util.spec_from_file_location(name, os.path.join(BASE, fn))
+    spec = importlib.util.spec_from_file_location(name, os.path.join(SRC_DIR, fn))
     m = importlib.util.module_from_spec(spec)
     sys.modules[name] = m
     spec.loader.exec_module(m)
